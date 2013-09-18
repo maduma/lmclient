@@ -17,11 +17,14 @@ requirejs.config({
 });
 
 // Main
-require(["jquery", "underscore", "backbone", "router/mobileRouter"], function($, _, Backbone, Mobile) {
+require(["jquery", "underscore", "backbone", "router/mobileRouter",
+    "model/playerModel", "util/global"],
+    function($, _, Backbone, Mobile, PlayerModel, Global) {
+        
   // Version
-  console.log("jquery " + $.fn.jquery);
-  console.log("backbone " + Backbone.VERSION);
-  console.log("underscore " + _.VERSION);
+  //console.log("jquery " + $.fn.jquery);
+  //console.log("backbone " + Backbone.VERSION);
+  //console.log("underscore " + _.VERSION);
 
   // Set up the "mobileinit" handler before requiring jQuery Mobile's module
   $(document).on("mobileinit", function() {
@@ -36,8 +39,9 @@ require(["jquery", "underscore", "backbone", "router/mobileRouter"], function($,
     // now that jquery is loaded, display body
     $("body").css("display", "block");
     // Instantiates a new Backbone.js Mobile Router
-    this.router = new Mobile();
+    this.lmclientRouter = new Mobile();
+    // export global for debuging;
+    this.lmclientGlobal = Global;
   });
   
 });
-

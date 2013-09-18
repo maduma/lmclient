@@ -8,9 +8,23 @@
         <script data-main="js/mobile" src="js/lib/require.js"></script>
     </head>
     <body style="display: none">
-        <div data-role="page" id="home">
+        <div data-role="page" id="loading">
             <div data-role="content">
-                <h1>Learn Math Home</h1>
+                <h1>Loading...</h1>
+            </div>
+        </div>
+        <div data-role="page" id="registerForm">
+            <div data-role="content">
+                <h1>Register Form</h1>
+                <label for="uid">Uid:</label>
+                <input name="uid" id="uid" value="" type="text">
+                <a href="#registerUid" data-role="button">Submit</a> 
+            </div>
+        </div>
+        <div data-role="page" id="main">
+            <div data-role="content">
+                <h1>Main</h1>
+                Hello <span id="player-uid"></span>
             </div>
         </div>
     </body>
