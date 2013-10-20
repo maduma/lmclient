@@ -1,27 +1,35 @@
-define(["jquery", "backbone", "../model/playerModel", "../util/global"],
-    function($, Backbone, PlayerModel, Global) {
+define(["jquery", "backbone", "../model/playerModel",
+    "../view/mainView", "../view/workoutView", "../collection/workoutCollection"],
+    function($, Backbone, PlayerModel,
+        MainView, WorkoutView, WorkoutCollection) {
   
   var router = Backbone.Router.extend({
     initialize: function() {
-      Backbone.history.start();
+        this.player = new PlayerModel();
+        this.mainView = new MainView({el: $("span#player-uid"), model: this.player});
+        this.workoutView = new WorkoutView({el: $("div#workout-list")});
+        Backbone.history.start();
     },
     routes: {
       "": "loading",
-      "registerUid": "registerUid"
+      "registerUid": "registerUid",
+      "main": "main",
+      "selectOp": "selectOp",
+      "op?:type": "op",
+      "play?:wkLabel": "play"
     },
     loading: function() {
         $.mobile.changePage("#loading");
-        var player = Global.player;
-        player.fetch({
+        this.player.fetch({
             error: function() {
                 setTimeout(function() {
                     $.mobile.changePage("#registerForm");
-                }, 2000);
+                }, 500);
             },
             success: function() {
                 setTimeout(function() {
                     $.mobile.changePage("#main");
-                }, 2000);
+                }, 500);
             }
         });
     },
@@ -32,12 +40,33 @@ define(["jquery", "backbone", "../model/playerModel", "../util/global"],
         if (uid === "") {
             $.mobile.changePage("#registerForm");
         } else {
-            var player = Global.player;
-            player.set("uid", uid);
-            player.set("fullname", fullname);
-            player.save();
+            this.player.set("uid", uid);
+            this.player.set("fullname", fullname);
+            this.player.save();
             $.mobile.changePage("#main");
         }
+    },
+    main: function() {
+        $.mobile.changePage("#main");
+    },
+    selectOp: function() {
+        $.mobile.changePage("#selectOp");
+    },
+    op: function(type) {
+        this.player.set("type", type);
+        $.mobile.loading( "show" );
+        var wks = new WorkoutCollection([], {type: type});
+        this.workoutView.setCollection(wks);
+        var self = this;
+        wks.fetch().done(function() {
+            self.workoutView.$el.find('a').button();
+            $.mobile.changePage("#selectWorkout");
+        });
+    },
+    play: function(wkLabel) {
+        this.player.set("wkLabel", wkLabel);
+        console.log(wkLabel);
+        $.mobile.changePage("#play");
     }
   });
   return router;

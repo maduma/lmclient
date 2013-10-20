@@ -5,6 +5,7 @@ define(["jquery", "backbone"], function( $, Backbone) {
         },
         render: function() {
             this.$el.html(this.model.get("uid"));
+            $('a#play-back').attr('href', '#op?' + this.model.get("type"));
         }
     });
     return MainView;

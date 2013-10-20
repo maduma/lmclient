@@ -12,7 +12,8 @@ define(["jquery", "backbone", "../util/prop"], function( $, Backbone, Prop ) {
             "timedout": 0,
             "aborted": 0,
             // internal
-            "localStorage": 1
+            "localStorage": 1,
+            "type": ""
         },
         completed: function() {
             return this.get("succeded") + this.get("failed") +

@@ -8,11 +8,13 @@
         <script data-main="js/mobile" src="js/lib/require.js"></script>
     </head>
     <body style="display: none">
+        
         <div data-role="page" id="loading">
             <div data-role="content">
                 <h1>Loading...</h1>
             </div>
         </div>
+        
         <div data-role="page" id="registerForm">
             <div data-role="content">
                 <h1>Register Form</h1>
@@ -21,17 +23,100 @@
                 <a href="#registerUid" data-role="button">Submit</a> 
             </div>
         </div>
+        
         <div data-role="page" id="main">
+            <div data-role="header">
+                <h1>Home</h1>
+            </div>
             <div data-role="content">
                 <h1>Main</h1>
                 Hello <span id="player-uid"></span>
             </div>
+            <div data-role="footer" data-position="fixed">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <a href="#selectOp" data-role="button" data-icon="arrow-r">Next</a>
+                </fieldset>
+            </div> 
         </div>
-        <div data-role="page" id="main">
+        
+        <div data-role="page" id="selectOp">
+            <div data-role="header">
+                <h1>Operation</h1>
+            </div>
             <div data-role="content">
-                <h1>Main</h1>
-                Hello <span id="player-uid"></span>
+                <a href="#op?add" data-role="button">+ Addition</a>
+                <a href="#op?sub" data-role="button">+ Soustraction</a>
+                <a href="#op?div" data-role="button" class="ui-disabled">+ Multiplication</a>
+                <a href="#op?mul" data-role="button" class="ui-disabled">+ Division</a>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <a href="#main" data-role="button" data-icon="home">Home</a>
+                </fieldset>
             </div>
         </div>
+        
+        <div data-role="page" id="selectWorkout">
+            <div data-role="header">
+                <h1 id="opName">Operation</h1>
+            </div>
+            <div id="workout-list" data-role="content">
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <a href="#main" data-role="button" data-icon="home">Home</a>
+                    <a href="#selectOp" data-role="button" data-icon="arrow-l">Back</a>
+                </fieldset>
+            </div>
+        </div>
+        
+        <div data-role="page" id="play">
+            <div data-role="header">
+                <div class="scorePanel">
+                    Clock <span id="clock"></span> |
+                    Score <span id="scoreCorrect">0</span> / <span id="scoreWrong">0</span>
+                    - <span id="scorePercent">100</span>%
+                </div>
+            </div>
+            <div data-role="content">
+                <h1 class="prob"><span id="question">? ? ?</span> = <span id="answer">?</span></h1>
+                <div id="numpad">
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <button id="d7">7</button>
+                            <button id="d4">4</button>
+                            <button id="d1">1</button>
+                            <button id="d0">0</button>
+                        </div>
+                        <div class="ui-block-b">
+                            <button id="d8">8</button>
+                            <button id="d5">5</button>
+                            <button id="d2">2</button>
+                        </div>
+                        <div class="ui-block-c">
+                            <button id="d9">9</button>
+                            <button id="d6">6</button>
+                            <button id="d3">3</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div data-role="footer" data-position="fixed">
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <a id="play-back" href="" data-role="button" data-icon="arrow-l">Back</a>
+                <button id="start" data-icon="check">Start</button>
+                <button id="stop" data-icon="delete">Stop</button>
+                <input type="checkbox" name="bet" val="true" id="bet" data-mini="true" />
+                <label for="bet">Bet</label>
+            </fieldset>
+        </div>
+    
+        <!-- Underscore Template -->
+        <script id="workoutItems" type="text/template">
+            <% _.each(collection.toJSON(), function(wk, id) { %>
+                <a href="#play?<%= wk.label %>" data-role="button"><%= wk.label %></a>
+            <% }); %>
+        </script>
+        
     </body>
 </html>

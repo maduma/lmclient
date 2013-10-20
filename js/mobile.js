@@ -18,8 +18,8 @@ requirejs.config({
 
 // Main
 require(["jquery", "underscore", "backbone", "router/mobileRouter",
-    "model/playerModel", "util/global"],
-    function($, _, Backbone, Mobile, PlayerModel, Global) {
+    "model/playerModel"],
+    function($, _, Backbone, Mobile, PlayerModel) {
         
   // Version
   //console.log("jquery " + $.fn.jquery);
@@ -41,7 +41,6 @@ require(["jquery", "underscore", "backbone", "router/mobileRouter",
     // Instantiates a new Backbone.js Mobile Router
     this.lmclientRouter = new Mobile();
     // export global for debuging;
-    this.lmclientGlobal = Global;
   });
   
 });
