@@ -1,4 +1,4 @@
 lmclient
 ========
 
-Javascript client for 'Learn Math' application.
+Javascript client for a 'Learn Math' application.
