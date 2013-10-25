@@ -1,13 +1,18 @@
 define(["jquery", "backbone", "../model/playerModel",
-    "../view/mainView", "../view/workoutView", "../collection/workoutCollection"],
+    "../view/mainView", "../view/workoutView", "../collection/workoutCollection",
+    "../widget/numpad"],
     function($, Backbone, PlayerModel,
-        MainView, WorkoutView, WorkoutCollection) {
+        MainView, WorkoutView, WorkoutCollection,
+        Numpad) {
   
   var router = Backbone.Router.extend({
     initialize: function() {
+        this.wks = null;
         this.player = new PlayerModel();
         this.mainView = new MainView({el: $("span#player-uid"), model: this.player});
         this.workoutView = new WorkoutView({el: $("div#workout-list")});
+        this.numpad = new Numpad();
+        //this.numpad.setDelay(7);
         Backbone.history.start();
     },
     routes: {
@@ -55,17 +60,19 @@ define(["jquery", "backbone", "../model/playerModel",
     op: function(type) {
         this.player.set("type", type);
         $.mobile.loading( "show" );
-        var wks = new WorkoutCollection([], {type: type});
-        this.workoutView.setCollection(wks);
+        this.wks = new WorkoutCollection([], {type: type});
+        this.workoutView.setCollection(this.wks);
         var self = this;
-        wks.fetch().done(function() {
+        this.wks.fetch().done(function() {
             self.workoutView.$el.find('a').button();
             $.mobile.changePage("#selectWorkout");
         });
     },
     play: function(wkLabel) {
         this.player.set("wkLabel", wkLabel);
-        console.log(wkLabel);
+        var wk = this.wks.get(wkLabel);
+        wk.initExe();
+        this.numpad.setWk(wk);
         $.mobile.changePage("#play");
     }
   });

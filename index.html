@@ -46,8 +46,8 @@
             <div data-role="content">
                 <a href="#op?add" data-role="button">+ Addition</a>
                 <a href="#op?sub" data-role="button">+ Soustraction</a>
-                <a href="#op?div" data-role="button" class="ui-disabled">+ Multiplication</a>
-                <a href="#op?mul" data-role="button" class="ui-disabled">+ Division</a>
+                <a href="#op?mul" data-role="button">+ Multiplication</a>
+                <a href="#op?div" data-role="button">+ Division</a>
             </div>
             <div data-role="footer" data-position="fixed">
                 <fieldset data-role="controlgroup" data-type="horizontal">
@@ -104,10 +104,8 @@
         <div data-role="footer" data-position="fixed">
             <fieldset data-role="controlgroup" data-type="horizontal">
                 <a id="play-back" href="" data-role="button" data-icon="arrow-l">Back</a>
-                <button id="start" data-icon="check">Start</button>
-                <button id="stop" data-icon="delete">Stop</button>
-                <input type="checkbox" name="bet" val="true" id="bet" data-mini="true" />
-                <label for="bet">Bet</label>
+                <input id="start" type="button" data-icon="check" value="Start" />
+                <input id="stop" type="button" data-icon="delete" disabled="disabled" value="Stop"/>
             </fieldset>
         </div>
     

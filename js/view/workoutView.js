@@ -1,4 +1,4 @@
-define(["jquery", "backbone"], function( $, Backbone) {
+define(["jquery", "backbone", "underscore"], function( $, Backbone, _) {
     var WorkoutView = Backbone.View.extend({
         initialize: function() {
             if(this.collection) {

@@ -1,5 +1,6 @@
-define(["jquery", "backbone", "../util/prop"], function( $, Backbone, Prop ) {
+define(["jquery", "backbone", "../util/prop", "underscore"], function( $, Backbone, Prop, _ ) {
     var Model = Backbone.Model.extend({
+        exeList: [],
         idAttribute: "label",
         defaults: {
             "label": "",
@@ -23,6 +24,70 @@ define(["jquery", "backbone", "../util/prop"], function( $, Backbone, Prop ) {
             "bronze": 0,
             // internal
             "localStorage": 1
+        },
+        initExe: function() {
+            var tmp = this.get('label').split(':');
+            var type = tmp[0];
+            var startDigit = parseInt(tmp[1]);
+            var stopDigit = parseInt(tmp[2]);
+            var i,j = 0;
+            this.exeList = [];
+            if (type == 'add') {
+                for (i=startDigit; i<=stopDigit; i++) {
+                    for (j=startDigit; j<=stopDigit; j++) {
+                        this.exeList.push({
+                            solution: (i + j).toString(),
+                            question: i + ' + ' + j,
+                            correct : 0,
+                            wrong: 0
+                        });
+                    }
+                }
+            }
+            if (type == 'sub') {
+                for (i=startDigit; i<=stopDigit; i++) {
+                    for (j=startDigit; j<=stopDigit; j++) {
+                        if (i-j > 0) {
+                            this.exeList.push({
+                                solution: (i - j).toString(),
+                                question: i + ' - ' + j,
+                                correct : 0,
+                                wrong: 0
+                            });
+                        }
+                    }
+                }
+            }
+            if (type == 'mul') {
+                for (i=startDigit; i<=stopDigit; i++) {
+                    for (j=startDigit; j<=stopDigit; j++) {
+                        this.exeList.push({
+                            solution: (i * j).toString(),
+                            question: i + ' * ' + j,
+                            correct : 0,
+                            wrong: 0
+                        });
+                    }
+                }
+            }
+            if (type == 'div') {
+                for (i=startDigit; i<=stopDigit; i++) {
+                    for (j=startDigit; j<=stopDigit; j++) {
+                        this.exeList.push({
+                            solution: i.toString(),
+                            question: i * j + ' : ' + j,
+                            correct : 0,
+                            wrong: 0
+                        });
+                    }
+                }
+            }
+            console.log(this.get('label'));
+            console.log(this.exeList);
+        },
+        nextExe: function() {
+            var exe = _.shuffle(this.exeList).pop();
+            return exe;
         }
     });
     return Model;

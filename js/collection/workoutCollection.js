@@ -1,4 +1,4 @@
-define([ "jquery", "backbone", "../model/workoutModel" ], function( $, Backbone, WorkoutModel ) {
+define([ "jquery", "backbone", "../model/workoutModel", "underscore" ], function( $, Backbone, WorkoutModel, _ ) {
     var Collection = Backbone.Collection.extend( {
         model: WorkoutModel,
         url: '/workout',
@@ -24,7 +24,21 @@ define([ "jquery", "backbone", "../model/workoutModel" ], function( $, Backbone,
             { "label": "sub:1:17", "op": "sub"},
             { "label": "sub:1:18", "op": "sub"},
             { "label": "sub:1:19", "op": "sub"},
-            { "label": "sub:1:20", "op": "sub"}
+            { "label": "sub:1:20", "op": "sub"},
+            { "label": "mul:1:4", "op": "mul"},
+            { "label": "mul:1:5", "op": "mul"},
+            { "label": "mul:1:6", "op": "mul"},
+            { "label": "mul:1:7", "op": "mul"},
+            { "label": "mul:1:8", "op": "mul"},
+            { "label": "mul:1:9", "op": "mul"},
+            { "label": "mul:1:10", "op": "mul"},
+            { "label": "div:1:4", "op": "div"},
+            { "label": "div:1:5", "op": "div"},
+            { "label": "div:1:6", "op": "div"},
+            { "label": "div:1:7", "op": "div"},
+            { "label": "div:1:8", "op": "div"},
+            { "label": "div:1:9", "op": "div"},
+            { "label": "div:1:10", "op": "div"}
         ],
         initialize: function(models, options) {
             this.type = options.type;
