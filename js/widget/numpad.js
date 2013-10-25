@@ -38,7 +38,7 @@ define([ "jquery" ], function( $ ) {
         this.handler;
         this.enabled = false;
         this.exe;
-        this.delay = 5;
+        this.delay = 10;
         this.countdown = 0;
         this.intervalID;
         this.wk;
