@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "../util/prop"], function( $, Backbone, Prop ) {
+define(["jquery", "backbone", "util/prop"], function( $, Backbone, Prop ) {
     var Model = Backbone.Model.extend({
         idAttribute: "uid",
         defaults: {
@@ -45,5 +45,6 @@ define(["jquery", "backbone", "../util/prop"], function( $, Backbone, Prop ) {
         }
         
     });
-    return Model;
+    // singleton
+    return new Model();
 });

@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "../util/prop", "underscore", "model/exeModel", "collection/exeCollection"], function( $, Backbone, Prop, _, ExeModel, ExeCollection ) {
+define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "collection/exeCollection"], function( $, Backbone, Prop, _, ExeModel, ExeCollection ) {
     var Model = Backbone.Model.extend({
         idAttribute: "label",
         defaults: {

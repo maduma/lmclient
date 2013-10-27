@@ -1,4 +1,4 @@
-define([ "jquery", "backbone", "../model/exeModel", "underscore", "../util/prop"], function( $, Backbone, ExeModel, _, Prop ) {
+define([ "jquery", "backbone", "model/exeModel", "underscore", "util/prop"], function( $, Backbone, ExeModel, _, Prop ) {
     var collection = Backbone.Collection.extend({
         model: ExeModel,
         sync: function( method, model, options ) {

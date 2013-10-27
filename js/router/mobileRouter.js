@@ -1,6 +1,6 @@
-define(["jquery", "backbone", "../model/playerModel",
-    "../view/mainView", "../view/workoutView", "../collection/workoutCollection",
-    "../widget/numpad"],
+define(["jquery", "backbone", "model/playerModel",
+    "view/mainView", "view/workoutView", "collection/workoutCollection",
+    "widget/numpad"],
     function($, Backbone, PlayerModel,
         MainView, WorkoutView, WorkoutCollection,
         Numpad) {
@@ -8,7 +8,7 @@ define(["jquery", "backbone", "../model/playerModel",
   var router = Backbone.Router.extend({
     initialize: function() {
         this.wks = null;
-        this.player = new PlayerModel();
+        this.player = PlayerModel;
         this.mainView = new MainView({el: $("span#player-uid"), model: this.player});
         this.workoutView = new WorkoutView({el: $("div#workout-list")});
         this.numpad = new Numpad();

@@ -1,12 +1,14 @@
-define(["jquery", "backbone", "../util/prop", "underscore" ], function( $, Backbone, Prop, _ ) {
+define(["jquery", "backbone", "util/prop", "underscore", "model/playerModel"], function( $, Backbone, Prop, _, PlayerModel ) {
     var Model = Backbone.Model.extend({
         idAttribute: "question",
         sync: function( method, model, options ) {
+            var player = PlayerModel;
+            var playerTag = player.get('uid') + ':'; 
             if (method == "read") {
                 var deferred = $.Deferred();
-                var savedExe = JSON.parse(localStorage.getItem(Prop.tag + 'exe:' + this.id));
+                var savedExe = JSON.parse(localStorage.getItem(Prop.tag + playerTag + 'exe:' + this.id));
                 if (!savedExe) {
-                    localStorage.setItem(Prop.tag + 'exe:' + this.id, JSON.stringify(this));
+                    localStorage.setItem(Prop.tag  + playerTag + 'exe:' + this.id, JSON.stringify(this));
                     savedExe = JSON.parse(JSON.stringify(this));
                 }
                 console.log(savedExe.question + " " + savedExe.correct + ':' + savedExe.wrong)
@@ -14,7 +16,7 @@ define(["jquery", "backbone", "../util/prop", "underscore" ], function( $, Backb
                 deferred.resolve();
             } else if (method == "update") {
                 console.log("savind " + this);
-                localStorage.setItem(Prop.tag + 'exe:' + this.id, JSON.stringify(this));
+                localStorage.setItem(Prop.tag + playerTag + 'exe:' + this.id, JSON.stringify(this));
             }
         }
     });
