@@ -38,7 +38,8 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                             solution: (i + j).toString(),
                             question: i + ' + ' + j,
                             correct : 0,
-                            wrong: 0
+                            wrong: 0,
+                            total: 0
                         }));
                     }
                 }
@@ -51,7 +52,8 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                                 solution: (i - j).toString(),
                                 question: i + ' - ' + j,
                                 correct : 0,
-                                wrong: 0
+                                wrong: 0,
+                                total: 0
                             }));
                         }
                     }
@@ -64,7 +66,8 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                             solution: (i * j).toString(),
                             question: i + ' * ' + j,
                             correct : 0,
-                            wrong: 0
+                            wrong: 0,
+                            total: 0
                         }));
                     }
                 }
@@ -76,7 +79,8 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                             solution: i.toString(),
                             question: i * j + ' : ' + j,
                             correct : 0,
-                            wrong: 0
+                            wrong: 0,
+                            total: 0
                         }));
                     }
                 }
@@ -86,14 +90,14 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
             console.log(this.exeList);
         },
         nextExe: function() {
-            var minCorrect = _.min(this.exeList.pluck("correct"));
-            var correctList = this.exeList.filter(function(exe) {
-                return exe.get("correct") === minCorrect;
+            var minTotal = _.min(this.exeList.pluck("total"));
+            var totalList = this.exeList.filter(function(exe) {
+                return exe.get("total") === minTotal;
             });
-            var maxWrong = _.max(_.map(correctList, function(exe) {
+            var maxWrong = _.max(_.map(totalList, function(exe) {
                 return exe.get("wrong");
             }));
-            var finalList = _.filter(correctList, function(exe) {
+            var finalList = _.filter(totalList, function(exe) {
                 return exe.get("wrong") === maxWrong;
             });
             var exe = _.shuffle(finalList).pop();
