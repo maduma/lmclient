@@ -5,6 +5,9 @@ define(["jquery", "backbone", "util/prop"], function( $, Backbone, Prop ) {
             "uid": "",
             "fullname": "",
             "wallet": 0.0, //Euro
+            "goldMedal": 0,
+            "silverMedal": 0,
+            "bronzeMedal": 0,
             // stats
             "playingTime": 0, //second
             "succeded": 0,

@@ -22,7 +22,9 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
             "silver": 0,
             "bronze": 0,
             // internal
-            "localStorage": 1
+            "localStorage": 1,
+            "wrong": 0,
+            "correct": 0
         },
         initExe: function() {
             var tmp = this.get('label').split(':');
@@ -103,6 +105,9 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
             var exe = _.shuffle(finalList).pop();
             console.log(exe);
             return exe;
+        },
+        inc: function(attr)  {
+            this.set(attr, this.get(attr) + 1);
         }
     });
     return Model;

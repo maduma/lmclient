@@ -1,5 +1,7 @@
 define([ "jquery"], function( $ ) {
     
+    // check if stop can be run anytime
+    
     var startCountdown = function(that) {
         that.countdown = that.delay;
         that.intervalID = window.setInterval(function() {
@@ -7,7 +9,7 @@ define([ "jquery"], function( $ ) {
                 window.clearInterval(that.intervalID);
                 wrongAnswer(that)
             }
-            console.log(that.countdown);
+            //console.log(that.countdown);
             that.countdown--;
         }, 1000);
     }
@@ -20,6 +22,7 @@ define([ "jquery"], function( $ ) {
     }
     
     var wrongAnswer = function(that) {
+        that.wk.inc("wrong");
         that.enabled = false;
         that.exe.set("wrong", that.exe.get("wrong") + 1);
         that.exe.save();
@@ -54,6 +57,7 @@ define([ "jquery"], function( $ ) {
             that.answer = that.answer + digit;
             $('span#answer').html(that.answer);
             if (that.exe.get("solution") == that.answer) {
+                that.wk.inc("correct");
                 window.clearInterval(that.intervalID);
                 that.exe.set("correct", that.exe.get("correct") + 1);
                 that.exe.save();
@@ -72,29 +76,16 @@ define([ "jquery"], function( $ ) {
                 wrongAnswer(that);
             }
         });
-        $('input#start').click(function() {
-            that.start();
-        });
-        $('input#stop').click(function() {
-            that.stop();
-        });
     }
     Numpad.prototype.setWk = function(wk) {
         this.wk = wk;
         nextExe(this);
     }
     Numpad.prototype.start = function() {
-         $('input#start').button( "disable" );
-         $('a#play-back').addClass("ui-disabled");
-         $('input#stop').button( "enable" );
-         this.enabled = true;
+        this.enabled = true;
         startCountdown(this);
     }
     Numpad.prototype.stop = function() {
-        $('input#stop').button( "disable" );
-        $('input#start').button( "enable" );
-        $('a#play-back').removeClass("ui-disabled");
-        
         this.enabled = false;
         window.clearInterval(this.intervalID);
     }

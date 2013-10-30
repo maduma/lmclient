@@ -1,9 +1,9 @@
 define(["jquery", "backbone", "model/playerModel",
     "view/mainView", "view/workoutView", "collection/workoutCollection",
-    "widget/numpad"],
+    "model/gameModel", "view/gameView"],
     function($, Backbone, PlayerModel,
         MainView, WorkoutView, WorkoutCollection,
-        Numpad) {
+        GameModel, GameView) {
   
   var router = Backbone.Router.extend({
     initialize: function() {
@@ -11,7 +11,8 @@ define(["jquery", "backbone", "model/playerModel",
         this.player = PlayerModel;
         this.mainView = new MainView({el: $("span#player-uid"), model: this.player});
         this.workoutView = new WorkoutView({el: $("div#workout-list")});
-        this.numpad = new Numpad();
+        this.game = GameModel;
+        this.gameView = new GameView({model: this.game});
         //this.numpad.setDelay(7);
         Backbone.history.start();
     },
@@ -72,7 +73,7 @@ define(["jquery", "backbone", "model/playerModel",
         this.player.set("wkLabel", wkLabel);
         var wk = this.wks.get(wkLabel);
         wk.initExe();
-        this.numpad.setWk(wk);
+        this.game.setWk(wk);
         $.mobile.changePage("#play");
     }
   });
