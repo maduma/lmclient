@@ -21,6 +21,7 @@ define([
                 console.log(self.get("countdown"));
                 if(self.get("countdown") === 0) {
                     clearInterval(self.intervalID);
+                    self.finished = true;
                     self.stop({data: self}); 
                 } else {
                     self.set("countdown", self.get("countdown") - 1);
@@ -40,9 +41,11 @@ define([
             $('a#play-back').removeClass("ui-disabled");
             self.numpad.stop();
             console.log('Game:stop');
+            self.wk.save();
         },
         setWk : function(wk) {
             this.numpad.setWk(wk);
+            this.wk = wk;
             this.set("countdown", 300);
             $("span#scoreCorrect").html(wk.get("correct"));
             $("span#scoreWrong").html(wk.get("wrong"));

@@ -1,4 +1,5 @@
-define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "collection/exeCollection"], function( $, Backbone, Prop, _, ExeModel, ExeCollection ) {
+define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "collection/exeCollection",
+        "model/playerModel"], function( $, Backbone, Prop, _, ExeModel, ExeCollection, PlayerModel ) {
     var Model = Backbone.Model.extend({
         idAttribute: "label",
         defaults: {
@@ -38,10 +39,7 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                     for (j=startDigit; j<=stopDigit; j++) {
                         this.exeList.push(new ExeModel({
                             solution: (i + j).toString(),
-                            question: i + ' + ' + j,
-                            correct : 0,
-                            wrong: 0,
-                            total: 0
+                            question: i + ' + ' + j
                         }));
                     }
                 }
@@ -52,10 +50,7 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                         if (i-j > 0) {
                             this.exeList.push(new ExeModel({
                                 solution: (i - j).toString(),
-                                question: i + ' - ' + j,
-                                correct : 0,
-                                wrong: 0,
-                                total: 0
+                                question: i + ' - ' + j
                             }));
                         }
                     }
@@ -66,10 +61,7 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                     for (j=startDigit; j<=stopDigit; j++) {
                         this.exeList.push(new ExeModel({
                             solution: (i * j).toString(),
-                            question: i + ' * ' + j,
-                            correct : 0,
-                            wrong: 0,
-                            total: 0
+                            question: i + ' * ' + j
                         }));
                     }
                 }
@@ -79,10 +71,7 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                     for (j=startDigit; j<=stopDigit; j++) {
                         this.exeList.push(new ExeModel({
                             solution: i.toString(),
-                            question: i * j + ' : ' + j,
-                            correct : 0,
-                            wrong: 0,
-                            total: 0
+                            question: i * j + ' : ' + j
                         }));
                     }
                 }
@@ -108,6 +97,23 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
         },
         inc: function(attr)  {
             this.set(attr, this.get(attr) + 1);
+        },
+        sync: function( method, model, options ) {
+            var player = PlayerModel;
+            var playerTag = player.get('uid') + ':'; 
+            if (method == "read") {
+                var deferred = $.Deferred();
+                var savedWk = JSON.parse(localStorage.getItem(Prop.tag + playerTag + 'exe:' + this.id));
+                if (!savedWk) {
+                    localStorage.setItem(Prop.tag  + playerTag + 'wk:' + this.id, JSON.stringify(this));
+                    savedWk = JSON.parse(JSON.stringify(this));
+                }
+                options.success(savedWk);
+                deferred.resolve();
+            } else if (method == "update") {
+                console.log("savind " + this);
+                localStorage.setItem(Prop.tag + playerTag + 'wk:' + this.id, JSON.stringify(this));
+            }
         }
     });
     return Model;
