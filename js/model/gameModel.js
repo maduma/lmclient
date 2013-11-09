@@ -17,7 +17,7 @@ define([
         start: function(event) {
             console.log(event.data);
             var self = event.data;
-            self.set("countdown", 30) // 5 min
+            self.set("countdown", 300) // 5 min
             self.intervalID = window.setInterval(function(){
                 console.log(self.get("countdown"));
                 if(self.get("countdown") === 0) {
