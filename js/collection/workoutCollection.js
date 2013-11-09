@@ -47,7 +47,16 @@ define([ "jquery", "backbone", "model/workoutModel", "underscore" ], function( $
             var self = this;
             var deferred = $.Deferred();
             setTimeout( function() {
-                options.success(_.where(self.jsonArray, {'op': self.type}));
+                var wkAr = _.where(self.jsonArray, {'op': self.type});
+                _.each(wkAr, function(e) {
+                    var wk = new WorkoutModel(e);
+                    wk.fetch();
+                    self.listenTo(wk, "change", function(){
+                        self.trigger("added");
+                    });
+                    self.push(wk);
+                });
+                options.success(self.models);
                 self.trigger("added");
                 deferred.resolve();
             }, 100);

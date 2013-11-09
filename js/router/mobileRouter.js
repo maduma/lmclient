@@ -72,6 +72,7 @@ define(["jquery", "backbone", "model/playerModel",
     play: function(wkLabel) {
         this.player.set("wkLabel", wkLabel);
         var wk = this.wks.get(wkLabel);
+        wk.fetch();
         wk.initExe();
         this.game.setWk(wk);
         $.mobile.changePage("#play");

@@ -4,7 +4,8 @@ define([
     "util/prop",
     "underscore",
     "widget/numpad",
-    ], function($, Backbone, Prop, _, Numpad) {
+    "model/playerModel"
+    ], function($, Backbone, Prop, _, Numpad, Player) {
 
     var Model = Backbone.Model.extend({
         numpad: null,
@@ -16,7 +17,7 @@ define([
         start: function(event) {
             console.log(event.data);
             var self = event.data;
-            self.set("countdown", 300) // 5 min
+            self.set("countdown", 30) // 5 min
             self.intervalID = window.setInterval(function(){
                 console.log(self.get("countdown"));
                 if(self.get("countdown") === 0) {
@@ -41,6 +42,26 @@ define([
             $('a#play-back').removeClass("ui-disabled");
             self.numpad.stop();
             console.log('Game:stop');
+            if (self.finished) {
+                if(self.wk.get("wrong") < 1) {
+                    Player.inc("goldMedal");
+                    self.wk.inc("gold");
+                } else if (self.wk.get("wrong") < 3) {
+                    Player.inc("silverMedal");
+                    self.wk.inc("silver");
+                } else if (self.wk.get("wrong") < 5) {
+                    Player.inc("bronzeMedal");
+                    self.wk.inc("bronze");
+                } else {
+                    self.wk.inc("miss");
+                }
+                self.wk.inc("bank");
+                
+                Player.save();
+            } else {
+                console.log('Game:abort');
+                self.wk.inc("abort");
+            }
             self.wk.save();
         },
         setWk : function(wk) {

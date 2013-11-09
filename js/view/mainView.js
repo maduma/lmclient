@@ -6,6 +6,9 @@ define(["jquery", "backbone"], function( $, Backbone) {
         render: function() {
             this.$el.html(this.model.get("uid"));
             $('a#play-back').attr('href', '#op?' + this.model.get("type"));
+            $('span#gold').html(this.model.get("goldMedal"));
+            $('span#silver').html(this.model.get("silverMedal"));
+            $('span#bronze').html(this.model.get("bronzeMedal"));
         }
     });
     return MainView;

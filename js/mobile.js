@@ -35,6 +35,11 @@ require(["jquery", "underscore", "backbone", "router/mobileRouter",
     $.mobile.hashListeningEnabled = false;
   });
   
+  // prevent scrolling
+  $('body').on('touchmove', function(event) {
+    event.preventDefault();
+  });
+  
   require( [ "jquerymobile" ], function() {
     // now that jquery is loaded, display body
     $("body").css("display", "block");

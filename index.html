@@ -10,6 +10,7 @@
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
         <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png" />
         <link rel="stylesheet" href="css/lib/jqm/jquery.mobile.css" />
+        <link rel="stylesheet" href="css/style.css" />
         <script data-main="js/mobile" src="js/lib/require.js"></script>
     </head>
     <body style="display: none">
@@ -35,7 +36,12 @@
             </div>
             <div data-role="content">
                 <h1>Main</h1>
-                Hello <span id="player-uid"></span>
+                Bonjour <span id="player-uid"></span>
+                <ul>
+                    <li class="gold">Or <span id="gold"></span></li>
+                    <li class="silver">Argent <span id="silver"></span></li>
+                    <li class="bronze">Bronze <span id="bronze"></span></li>
+                </ul>
             </div>
             <div data-role="footer" data-position="fixed">
                 <fieldset data-role="controlgroup" data-type="horizontal">
@@ -116,9 +122,13 @@
     
         <!-- Underscore Template -->
         <script id="workoutItems" type="text/template">
-            <% _.each(collection.toJSON(), function(wk, id) { %>
-                <a href="#play?<%= wk.label %>" data-role="button"><%= wk.label %></a>
-            <% }); %>
+            <%  _.each(collection.toJSON(), function(wk, id) {
+                    if (wk.bank <= 15) { %>
+                    <a href="#play?<%= wk.label %>" data-role="button"><%= wk.label %> - <%= wk.bank %> - <%= wk.gold %>,<%= wk.silver %>,<%= wk.bronze %>,<%= wk.miss %>,<%= wk.abort %></a>
+            <%      } else { %>
+                    <a href="#play?<%= wk.label %>" data-role="button" class="ui-disabled"><%= wk.label %> - <%= wk.bank %> - <%= wk.gold %>,<%= wk.silver %>,<%= wk.bronze %>,<%= wk.miss %>,<%= wk.abort %></a>
+            <%      }
+                }); %>
         </script>
         
     </body>

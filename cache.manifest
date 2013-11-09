@@ -1,17 +1,20 @@
 CACHE MANIFEST
-# rev 1
+# rev 2
 NETWORK:
 CACHE:
+css/style.css
 css/lib/jqm/images/icons-18-black.png
 css/lib/jqm/images/icons-36-black.png
 css/lib/jqm/images/icons-18-white.png
 css/lib/jqm/images/icons-36-white.png
 css/lib/jqm/images/ajax-loader.gif
 css/lib/jqm/jquery.mobile.css
+js/view/gameView.js
 js/view/mainView.js
 js/view/workoutView.js
 js/collection/reportCollection.js
 js/collection/workoutCollection.js
+js/collection/exeCollection.js
 js/mobile.js
 js/util/prop.js
 js/widget/numpad.js
@@ -22,7 +25,9 @@ js/lib/jquery.js
 js/lib/backbone.js
 js/router/mobileRouter.js
 js/model/workoutModel.js
+js/model/gameModel.js
 js/model/reportModel.js
+js/model/exeModel.js
 js/model/playerModel.js
 index.html
 img/apple-touch-icon.png

@@ -22,6 +22,7 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
             "gold": 0,
             "silver": 0,
             "bronze": 0,
+            "miss": 0,
             // internal
             "localStorage": 1,
             "wrong": 0,
@@ -103,15 +104,16 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
             var playerTag = player.get('uid') + ':'; 
             if (method == "read") {
                 var deferred = $.Deferred();
-                var savedWk = JSON.parse(localStorage.getItem(Prop.tag + playerTag + 'exe:' + this.id));
+                var savedWk = JSON.parse(localStorage.getItem(Prop.tag + playerTag + 'wk:' + this.id));
                 if (!savedWk) {
                     localStorage.setItem(Prop.tag  + playerTag + 'wk:' + this.id, JSON.stringify(this));
                     savedWk = JSON.parse(JSON.stringify(this));
                 }
                 options.success(savedWk);
+                console.log("WorkoutModel:fetch", savedWk)
                 deferred.resolve();
             } else if (method == "update") {
-                console.log("savind " + this);
+                console.log("WorkoutModel:update", this)
                 localStorage.setItem(Prop.tag + playerTag + 'wk:' + this.id, JSON.stringify(this));
             }
         }

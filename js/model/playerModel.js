@@ -45,8 +45,10 @@ define(["jquery", "backbone", "util/prop"], function( $, Backbone, Prop ) {
             } else {
                 return Backbone.Model.prototype.sync.apply(this, arguments);
             }
+        },
+        inc: function(attr)  {
+            this.set(attr, this.get(attr) + 1);
         }
-        
     });
     // singleton
     return new Model();
