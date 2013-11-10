@@ -64,6 +64,8 @@ define([
                 console.log('Game:abort');
                 self.wk.inc("abort");
             }
+			self.wk.set("correct", 0);
+			self.wk.set("wrong", 0);
             self.wk.save();
             $.mobile.changePage("#main");
         },
@@ -82,6 +84,9 @@ define([
                 var percent = Math.floor((total - wk.get("wrong")) / total * 100);
                 $("span#scorePercent").html(percent);
             });
+			this.wk.set("correct", 0);
+			this.wk.set("wrong", 0);
+			this.wk.save();
         }
     });
 
