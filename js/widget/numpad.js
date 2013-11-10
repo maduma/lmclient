@@ -32,9 +32,11 @@ define([ "jquery"], function( $ ) {
             $(this).css('color', 'black');
             //that.handler('wrong');
             console.log('wrong');
-            nextExe(that);
-            startCountdown(that);
-            that.enabled = true;
+            if (!that.stoped) {
+                nextExe(that);
+                startCountdown(that);
+                that.enabled = true;
+            }
         }).fadeIn(100);
     }
     
@@ -47,6 +49,7 @@ define([ "jquery"], function( $ ) {
         this.countdown = 0;
         this.intervalID;
         this.wk;
+        this.stoped = false;
   
         var that = this;
         
@@ -64,9 +67,11 @@ define([ "jquery"], function( $ ) {
                 $('span#answer').delay(500).fadeOut(function() {
                     //that.handler('correct');
                     console.log('correct');
-                    nextExe(that);
-                    startCountdown(that);
-                    that.enabled = true;
+                    if (!that.stoped) {
+                        nextExe(that);
+                        startCountdown(that);
+                        that.enabled = true;
+                    }
                 }).fadeIn(100);
             } else if (that.exe.get("solution").search(that.answer) === 0) {
                 that.enabled = true;
@@ -83,9 +88,11 @@ define([ "jquery"], function( $ ) {
     }
     Numpad.prototype.start = function() {
         this.enabled = true;
+        this.stoped = false;
         startCountdown(this);
     }
     Numpad.prototype.stop = function() {
+        this.stoped = true;
         this.enabled = false;
         window.clearInterval(this.intervalID);
     }

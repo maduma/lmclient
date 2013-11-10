@@ -17,7 +17,7 @@ define([
         start: function(event) {
             console.log(event.data);
             var self = event.data;
-            self.set("countdown", 300) // 5 min
+            self.set("countdown", 10) // 5 min
             self.intervalID = window.setInterval(function(){
                 console.log(self.get("countdown"));
                 if(self.get("countdown") === 0) {
@@ -65,6 +65,7 @@ define([
                 self.wk.inc("abort");
             }
             self.wk.save();
+            $.mobile.changePage("#main");
         },
         setWk : function(wk) {
             this.numpad.setWk(wk);
