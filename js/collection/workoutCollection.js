@@ -42,7 +42,7 @@ define([ "jquery", "backbone", "model/workoutModel", "underscore", "model/player
         ],
         disabledArray: {
             "maduma": ["add:1:5", "add:1:6", "add:2:7", "add:2:8"],
-            "hugo": ["add:1:5", "add:1:6", "add:2:7", "add:2:8"],
+            "Hugo": ["add:1:5", "add:1:6", "add:2:7", "add:2:8"],
             
         },
         initialize: function(models, options) {
