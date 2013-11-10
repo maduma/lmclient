@@ -1,4 +1,4 @@
-define([ "jquery", "backbone", "model/workoutModel", "underscore" ], function( $, Backbone, WorkoutModel, _ ) {
+define([ "jquery", "backbone", "model/workoutModel", "underscore", "model/playerModel" ], function( $, Backbone, WorkoutModel, _, Player ) {
     var Collection = Backbone.Collection.extend( {
         model: WorkoutModel,
         url: '/workout',
@@ -40,6 +40,11 @@ define([ "jquery", "backbone", "model/workoutModel", "underscore" ], function( $
             { "label": "div:2:9", "op": "div"},
             { "label": "div:2:10", "op": "div"}
         ],
+        disabledArray: {
+            "maduma": ["add:1:5", "add:1:6", "add:2:7", "add:2:8"],
+            "hugo": ["add:1:5", "add:1:6", "add:2:7", "add:2:8"],
+            
+        },
         initialize: function(models, options) {
             this.type = options.type;
         },
@@ -53,6 +58,14 @@ define([ "jquery", "backbone", "model/workoutModel", "underscore" ], function( $
                     wk.fetch();
                     self.listenTo(wk, "change", function(){
                         self.trigger("added");
+                    });
+                    var disabledWks = self.disabledArray[Player.get("uid")];
+                    console.log("disabledWks", disabledWks);
+                    _.each(disabledWks, function(e) {
+                       if(wk.id == e) {
+                           wk.set("bank", 16);
+                           wk.save();
+                       } 
                     });
                     self.push(wk);
                 });

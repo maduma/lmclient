@@ -33,6 +33,7 @@ define([ "jquery"], function( $ ) {
             //that.handler('wrong');
             console.log('wrong');
             if (!that.stoped) {
+                console.log("game stopped");
                 nextExe(that);
                 startCountdown(that);
                 that.enabled = true;
@@ -68,6 +69,7 @@ define([ "jquery"], function( $ ) {
                     //that.handler('correct');
                     console.log('correct');
                     if (!that.stoped) {
+                        console.log("game stopped");
                         nextExe(that);
                         startCountdown(that);
                         that.enabled = true;
