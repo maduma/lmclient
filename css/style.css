@@ -11,17 +11,21 @@
 }
 
 .goldImage {
+    background-position-y: -50px;
     background-image: url("/img/gold.png");
 }
 
 .silverImage {
+    background-position-y: -50px;
     background-image: url("/img/silver.png");
 }
 
 .bronzeImage {
+    background-position-y: -50px;
     background-image: url("/img/bronze.png");
 }
 
 .missImage {
+    background-position-y: -50px;
     background-image: url("/img/miss.png");
 }
