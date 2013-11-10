@@ -43,15 +43,15 @@ define([
             self.numpad.stop();
             console.log('Game:stop');
             var total = self.wk.get("correct") + self.wk.get("wrong");
-            var percent = Math.floor((total - self.wk.get("wrong")) / total * 100);
+            var percent = Math.round((total - self.wk.get("wrong")) / total * 100);
             if (self.finished) {
-                if (percent >= 98) {
+                if (percent >= 95) {
                     Player.inc("goldMedal");
                     self.wk.inc("gold");
-                } else if (percent >= 95) {
+                } else if (percent >= 90) {
                     Player.inc("silverMedal");
                     self.wk.inc("silver");
-                } else if (percent >= 90) {
+                } else if (percent >= 85) {
                     Player.inc("bronzeMedal");
                     self.wk.inc("bronze");
                 } else {
@@ -81,7 +81,7 @@ define([
                 $("span#scoreCorrect").html(wk.get("correct"));
                 $("span#scoreWrong").html(wk.get("wrong"));
                 var total = wk.get("correct") + wk.get("wrong");
-                var percent = Math.floor((total - wk.get("wrong")) / total * 100);
+                var percent = Math.round((total - wk.get("wrong")) / total * 100);
                 $("span#scorePercent").html(percent);
             });
 			this.wk.set("correct", 0);
