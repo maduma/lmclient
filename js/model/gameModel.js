@@ -7,6 +7,8 @@ define([
     "model/playerModel"
     ], function($, Backbone, Prop, _, Numpad, Player) {
 
+    var exeTime = 300;
+
     var Model = Backbone.Model.extend({
         numpad: null,
         initialize: function() {
@@ -17,7 +19,7 @@ define([
         start: function(event) {
             console.log(event.data);
             var self = event.data;
-            self.set("countdown", 300) // 5 min
+            self.set("countdown", exeTime) // 5 min
             self.intervalID = window.setInterval(function(){
                 console.log(self.get("countdown"));
                 if(self.get("countdown") === 0) {
@@ -44,18 +46,23 @@ define([
             console.log('Game:stop');
             var total = self.wk.get("correct") + self.wk.get("wrong");
             var percent = Math.round((total - self.wk.get("wrong")) / total * 100);
+            var cssClass;
             if (self.finished) {
                 if (percent >= 95) {
                     Player.inc("goldMedal");
                     self.wk.inc("gold");
+                    cssClass = "goldImage";
                 } else if (percent >= 90) {
                     Player.inc("silverMedal");
                     self.wk.inc("silver");
+                    cssClass = "silverImage";
                 } else if (percent >= 85) {
                     Player.inc("bronzeMedal");
                     self.wk.inc("bronze");
+                    cssClass = "bronzeImage";
                 } else {
                     self.wk.inc("miss");
+                    cssClass = "missImage";
                 }
                 self.wk.inc("bank");
                 
@@ -67,12 +74,14 @@ define([
 			self.wk.set("correct", 0);
 			self.wk.set("wrong", 0);
             self.wk.save();
-            $.mobile.changePage("#main");
+            $.mobile.changePage("#medal");
+            $("#medalImage").removeClass("goldImage silverImage bronzeImage missImage");
+            $("#medalImage").addClass(cssClass);
         },
         setWk : function(wk) {
             this.numpad.setWk(wk);
             this.wk = wk;
-            this.set("countdown", 300);
+            this.set("countdown", exeTime);
             $("span#scoreCorrect").html(wk.get("correct"));
             $("span#scoreWrong").html(wk.get("wrong"));
             $("span#scorePercent").html(100);

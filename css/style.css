@@ -9,3 +9,19 @@
 .bronze {
     color: #CD7F32;
 }
+
+.goldImage {
+    background-image: url("/img/gold.png");
+}
+
+.silverImage {
+    background-image: url("/img/silver.png");
+}
+
+.bronzeImage {
+    background-image: url("/img/bronze.png");
+}
+
+.missImage {
+    background-image: url("/img/miss.png");
+}

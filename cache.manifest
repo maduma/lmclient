@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 9
+# rev 12
 NETWORK:
 CACHE:
 css/style.css
@@ -30,5 +30,9 @@ js/model/reportModel.js
 js/model/exeModel.js
 js/model/playerModel.js
 index.html
-img/apple-touch-icon.png
+img/gold.png
+img/miss.png
 img/splash.png
+img/apple-touch-icon.png
+img/bronze.png
+img/silver.png

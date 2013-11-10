@@ -45,7 +45,10 @@ require(["jquery", "underscore", "backbone", "router/mobileRouter",
     $("body").css("display", "block");
     // Instantiates a new Backbone.js Mobile Router
     this.lmclientRouter = new Mobile();
-    // export global for debuging;
+    // bind click on medalImage page - return to main page
+    $("#medalImage").click(function(){
+        $.mobile.changePage("#main");
+    });
   });
   
 });
