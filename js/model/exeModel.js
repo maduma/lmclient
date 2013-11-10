@@ -33,9 +33,8 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/playerModel"], f
             this.set("consCorrect", this.get("consCorrect") + 1);
             if (this.get("consCorrect") == 2) {
                 this.set("total", this.get("total") + 4);
-            } else if (this.get("consCorrect") == 3) {
+            } else if (this.get("consCorrect") >= 3) {
                 this.set("total", this.get("total") + 6);
-                this.set("consCorrect", 0);
             } else {
                 this.set("total", this.get("total") + 2);
             }

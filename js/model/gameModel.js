@@ -42,14 +42,16 @@ define([
             $('a#play-back').removeClass("ui-disabled");
             self.numpad.stop();
             console.log('Game:stop');
+            var total = self.wk.get("correct") + self.wk.get("wrong");
+            var percent = Math.floor((total - self.wk.get("wrong")) / total * 100);
             if (self.finished) {
-                if(self.wk.get("wrong") < 1) {
+                if (percent >= 98) {
                     Player.inc("goldMedal");
                     self.wk.inc("gold");
-                } else if (self.wk.get("wrong") < 3) {
+                } else if (percent >= 95) {
                     Player.inc("silverMedal");
                     self.wk.inc("silver");
-                } else if (self.wk.get("wrong") < 5) {
+                } else if (percent >= 90) {
                     Player.inc("bronzeMedal");
                     self.wk.inc("bronze");
                 } else {
