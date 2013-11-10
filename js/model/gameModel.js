@@ -7,7 +7,7 @@ define([
     "model/playerModel"
     ], function($, Backbone, Prop, _, Numpad, Player) {
 
-    var exeTime = 30;
+    var exeTime = 300;
 
     var Model = Backbone.Model.extend({
         numpad: null,
