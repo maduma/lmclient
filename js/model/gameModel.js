@@ -65,18 +65,17 @@ define([
                     cssClass = "missImage";
                 }
                 self.wk.inc("bank");
-                
                 Player.save();
+                $("#medalImage").removeClass("goldImage silverImage bronzeImage missImage");
+                $("#medalImage").addClass(cssClass);
+                $.mobile.changePage("#medal");
             } else {
                 console.log('Game:abort');
                 self.wk.inc("abort");
             }
-			self.wk.set("correct", 0);
-			self.wk.set("wrong", 0);
+            self.wk.set("correct", 0);
+            self.wk.set("wrong", 0);
             self.wk.save();
-            $.mobile.changePage("#medal");
-            $("#medalImage").removeClass("goldImage silverImage bronzeImage missImage");
-            $("#medalImage").addClass(cssClass);
         },
         setWk : function(wk) {
             this.numpad.setWk(wk);
