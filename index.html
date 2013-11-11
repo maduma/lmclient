@@ -49,6 +49,7 @@
             <div data-role="footer" data-position="fixed">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <a href="#selectOp" data-role="button" data-icon="arrow-r">Next</a>
+                    <a href="#reports" data-role="button" data-icon="info">Report</a>
                 </fieldset>
             </div> 
         </div>
@@ -131,6 +132,14 @@
             <div id="medalImage" data-role="content" style="height: 460px;">
             </div>
         </div>
+        
+        <div data-role="page" id="reports">
+            <div data-role="header">
+                <h1>Reports</h1>
+            </div>
+            <ul id="reportList" data-role="listview">
+            </ul>
+        </div>
     
         <!-- Underscore Template -->
         <script id="workoutItems" type="text/template">
@@ -139,6 +148,13 @@
                         <a href="#play?<%= wk.label %>" data-role="button"><%= wk.label %> - <%= wk.bank %> - <%= wk.gold %>,<%= wk.silver %>,<%= wk.bronze %>,<%= wk.miss %>,<%= wk.abort %></a>
             <%      } 
                 }); %>
+        </script>
+        
+        <script id="reportItems" type="text/template">
+            <% _.each(collection.toJSON(), function(report, id) { 
+               var date = new Date(report.date) %>
+                <li><%= date %> - <%= report.wk %>,<%= report.correct %>,<%= report.wrong %>,<%= report.percent %>,<%= report.finished %></li>
+            <% }); %>
         </script>
         
     </body>

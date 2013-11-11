@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 16
+# rev 17
 NETWORK:
 CACHE:
 css/style.css
@@ -17,6 +17,7 @@ css/img/apple-touch-icon.png
 css/img/splash.png
 js/view/gameView.js
 js/view/mainView.js
+js/view/reportView.js
 js/view/workoutView.js
 js/collection/reportCollection.js
 js/collection/workoutCollection.js

@@ -1,9 +1,9 @@
 define(["jquery", "backbone", "model/playerModel",
     "view/mainView", "view/workoutView", "collection/workoutCollection",
-    "model/gameModel", "view/gameView"],
+    "model/gameModel", "view/gameView", "view/reportView", "collection/reportCollection"],
     function($, Backbone, PlayerModel,
         MainView, WorkoutView, WorkoutCollection,
-        GameModel, GameView) {
+        GameModel, GameView, ReportView, Reports) {
   
   var router = Backbone.Router.extend({
     initialize: function() {
@@ -22,7 +22,8 @@ define(["jquery", "backbone", "model/playerModel",
       "main": "main",
       "selectOp": "selectOp",
       "op?:type": "op",
-      "play?:wkLabel": "play"
+      "play?:wkLabel": "play",
+      "reports": "reports"
     },
     loading: function() {
         $.mobile.changePage("#loading");
@@ -34,8 +35,8 @@ define(["jquery", "backbone", "model/playerModel",
                 }, 500);
             },
             success: function() {
-                if (self.player.get("uid") == "maduma" ||
-                    self.player.get("uid") == "Hugo") {
+                if (self.player.get("uid") === "maduma" ||
+                    self.player.get("uid") === "Hugo") {
                     self.player.set("leveladd", 100);
                     self.player.save();
                 }
@@ -82,6 +83,14 @@ define(["jquery", "backbone", "model/playerModel",
         wk.initExe();
         this.game.setWk(wk);
         $.mobile.changePage("#play");
+    },
+    reports: function() {
+        console.log("toto");
+        this.reportView = new ReportView({el: $("ul#reportList"), collection: Reports});
+        Reports.fetch();
+        console.log("Reports", Reports);
+        $.mobile.changePage("#reports");
+        $('ul#reportList').listview( "refresh" );
     }
   });
   return router;
