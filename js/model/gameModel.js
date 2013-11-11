@@ -4,8 +4,9 @@ define([
     "util/prop",
     "underscore",
     "widget/numpad",
-    "model/playerModel"
-    ], function($, Backbone, Prop, _, Numpad, Player) {
+    "model/playerModel",
+    "collection/reportCollection"
+    ], function($, Backbone, Prop, _, Numpad, Player, Reports) {
 
     var exeTime = 300;
 
@@ -83,6 +84,12 @@ define([
                 Player.inc(levelName,-1);
                 Player.save();
             }
+            Reports.fetch();
+            console.log("reports", Reports);
+            console.log("attr", self.wk.get("correct"));
+            console.log("attr1", self.wk.attributes);
+            //Reports.add(self.wk.attributes);
+            Reports.save();
             self.wk.set("correct", 0);
             self.wk.set("wrong", 0);
             self.wk.save();
