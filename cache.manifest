@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 15
+# rev 16
 NETWORK:
 CACHE:
 css/style.css
@@ -9,6 +9,12 @@ css/lib/jqm/images/icons-18-white.png
 css/lib/jqm/images/icons-36-white.png
 css/lib/jqm/images/ajax-loader.gif
 css/lib/jqm/jquery.mobile.css
+css/img/gold.png
+css/img/bronze.png
+css/img/miss.png
+css/img/silver.png
+css/img/apple-touch-icon.png
+css/img/splash.png
 js/view/gameView.js
 js/view/mainView.js
 js/view/workoutView.js
@@ -30,9 +36,3 @@ js/model/reportModel.js
 js/model/exeModel.js
 js/model/playerModel.js
 index.html
-img/gold.png
-img/miss.png
-img/splash.png
-img/apple-touch-icon.png
-img/bronze.png
-img/silver.png

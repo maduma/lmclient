@@ -62,7 +62,7 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                     for (j=startDigit; j<=stopDigit; j++) {
                         this.exeList.push(new ExeModel({
                             solution: (i * j).toString(),
-                            question: i + ' * ' + j
+                            question: i + ' &times; ' + j
                         }));
                     }
                 }
@@ -72,7 +72,7 @@ define(["jquery", "backbone", "util/prop", "underscore", "model/exeModel", "coll
                     for (j=startDigit; j<=stopDigit; j++) {
                         this.exeList.push(new ExeModel({
                             solution: i.toString(),
-                            question: i * j + ' : ' + j
+                            question: i * j + ' &divide; ' + j
                         }));
                     }
                 }

@@ -17,6 +17,9 @@ define([
             $("input#stop").click(this, this.stop);
         },
         start: function(event) {
+            if (Player.get("uid") == "maduma") {
+                exeTime = 5;
+            }
             console.log(event.data);
             var self = event.data;
             self.set("countdown", exeTime) // 5 min
@@ -47,24 +50,29 @@ define([
             var total = self.wk.get("correct") + self.wk.get("wrong");
             var percent = Math.round((total - self.wk.get("wrong")) / total * 100);
             var cssClass;
+            var levelName = 'level' + self.wk.get("op");
             if (self.finished) {
                 if (percent >= 95) {
                     Player.inc("goldMedal");
+                    Player.inc(levelName,4);
                     self.wk.inc("gold");
                     cssClass = "goldImage";
                 } else if (percent >= 90) {
                     Player.inc("silverMedal");
+                    Player.inc(levelName,2);
                     self.wk.inc("silver");
                     cssClass = "silverImage";
                 } else if (percent >= 85) {
                     Player.inc("bronzeMedal");
+                    Player.inc(levelName);
                     self.wk.inc("bronze");
                     cssClass = "bronzeImage";
                 } else {
+                    Player.inc(levelName,-4);
                     self.wk.inc("miss");
                     cssClass = "missImage";
                 }
-                self.wk.inc("bank");
+                Player.inc(levelName,-1);
                 Player.save();
                 $("#medalImage").removeClass("goldImage silverImage bronzeImage missImage");
                 $("#medalImage").addClass(cssClass);
@@ -72,6 +80,8 @@ define([
             } else {
                 console.log('Game:abort');
                 self.wk.inc("abort");
+                Player.inc(levelName,-1);
+                Player.save();
             }
             self.wk.set("correct", 0);
             self.wk.set("wrong", 0);

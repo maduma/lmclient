@@ -26,6 +26,7 @@ define(["jquery", "backbone", "model/playerModel",
     },
     loading: function() {
         $.mobile.changePage("#loading");
+        var self = this;
         this.player.fetch({
             error: function() {
                 setTimeout(function() {
@@ -33,6 +34,11 @@ define(["jquery", "backbone", "model/playerModel",
                 }, 500);
             },
             success: function() {
+                if (self.player.get("uid") == "maduma" ||
+                    self.player.get("uid") == "Hugo") {
+                    self.player.set("leveladd", 100);
+                    self.player.save();
+                }
                 setTimeout(function() {
                     $.mobile.changePage("#main");
                 }, 500);

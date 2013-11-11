@@ -8,6 +8,11 @@ define(["jquery", "backbone", "util/prop"], function( $, Backbone, Prop ) {
             "goldMedal": 0,
             "silverMedal": 0,
             "bronzeMedal": 0,
+            "level": 0,
+            "leveladd": 0,
+            "levelsub": 0,
+            "levelmul": 0,
+            "leveldiv": 0,
             // stats
             "playingTime": 0, //second
             "succeded": 0,
@@ -46,8 +51,14 @@ define(["jquery", "backbone", "util/prop"], function( $, Backbone, Prop ) {
                 return Backbone.Model.prototype.sync.apply(this, arguments);
             }
         },
-        inc: function(attr)  {
-            this.set(attr, this.get(attr) + 1);
+        inc: function(attr, val)  {
+            if (val === undefined) {
+                val = 1;
+            }
+            this.set(attr, this.get(attr) + val);
+            if (this.get(attr) < 0) {
+                this.set(attr, 0);
+            }
         }
     });
     // singleton

@@ -6,9 +6,9 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="apple-touch-startup-image" href="img/splash.png" />
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
-        <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png" />
+        <link rel="apple-touch-startup-image" href="css/img/splash.png" />
+        <link rel="apple-touch-icon" href="css/img/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" href="css/img/apple-touch-icon.png" />
         <link rel="stylesheet" href="css/lib/jqm/jquery.mobile.css" />
         <link rel="stylesheet" href="css/style.css" />
         <script data-main="js/mobile" src="js/lib/require.js"></script>
@@ -32,11 +32,14 @@
         
         <div data-role="page" id="main">
             <div data-role="header">
-                <h1>Home</h1>
+                <h1>Math</h1>
             </div>
             <div data-role="content">
-                <h1>Main</h1>
+                <h1>Math</h1>
                 Bonjour <span id="player-uid"></span>
+                <p>
+                    Niveau <span id="levelAdd"></span>(+) <span id="levelSub"></span>(+) <span id="levelMul"></span>(&times;) <span id="levelDiv"></span>(&divide;)
+                </p>
                 <ul>
                     <li class="gold">Or <span id="gold"></span></li>
                     <li class="silver">Argent <span id="silver"></span></li>
@@ -57,8 +60,8 @@
             <div data-role="content">
                 <a href="#op?add" data-role="button">+ Addition</a>
                 <a href="#op?sub" data-role="button">- Soustraction</a>
-                <a href="#op?mul" data-role="button">x Multiplication</a>
-                <a href="#op?div" data-role="button">/ Division</a>
+                <a href="#op?mul" data-role="button">&times; Multiplication</a>
+                <a href="#op?div" data-role="button">&divide; Division</a>
             </div>
             <div data-role="footer" data-position="fixed">
                 <fieldset data-role="controlgroup" data-type="horizontal">
@@ -127,19 +130,14 @@
             </div>
             <div id="medalImage" data-role="content" style="height: 460px;">
             </div>
-            <div data-role="footer" data-position="fixed">
-                <h1>Medaille</h1>
-            </div>
         </div>
     
         <!-- Underscore Template -->
         <script id="workoutItems" type="text/template">
             <%  _.each(collection.toJSON(), function(wk, id) {
-                    if (wk.bank <= 15) { %>
-                    <a href="#play?<%= wk.label %>" data-role="button"><%= wk.label %> - <%= wk.bank %> - <%= wk.gold %>,<%= wk.silver %>,<%= wk.bronze %>,<%= wk.miss %>,<%= wk.abort %></a>
-            <%      } else { %>
-                    <a href="#play?<%= wk.label %>" data-role="button" class="ui-disabled"><%= wk.label %> - <%= wk.bank %> - <%= wk.gold %>,<%= wk.silver %>,<%= wk.bronze %>,<%= wk.miss %>,<%= wk.abort %></a>
-            <%      }
+                    if (level -20 < wk.level && level + 20 >= wk.level) { %>
+                        <a href="#play?<%= wk.label %>" data-role="button"><%= wk.label %> - <%= wk.bank %> - <%= wk.gold %>,<%= wk.silver %>,<%= wk.bronze %>,<%= wk.miss %>,<%= wk.abort %></a>
+            <%      } 
                 }); %>
         </script>
         
