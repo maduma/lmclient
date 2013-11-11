@@ -18,12 +18,12 @@ define([
             $("input#stop").click(this, this.stop);
         },
         start: function(event) {
-            if (Player.get("uid") == "maduma") {
+            if (Player.get("uid") === "maduma") {
                 exeTime = 5;
             }
             console.log(event.data);
             var self = event.data;
-            self.set("countdown", exeTime) // 5 min
+            self.set("countdown", exeTime); // 5 min
             self.intervalID = window.setInterval(function(){
                 console.log(self.get("countdown"));
                 if(self.get("countdown") === 0) {
@@ -85,10 +85,15 @@ define([
                 Player.save();
             }
             Reports.fetch();
-            console.log("reports", Reports);
-            console.log("attr", self.wk.get("correct"));
-            console.log("attr1", self.wk.attributes);
-            //Reports.add(self.wk.attributes);
+            Reports.addReport({
+                'date' : new Date(),
+                'wk' : self.wk.get("label"),
+                'correct' : self.wk.get("correct"),
+                'wrong' : self.wk.get("wrong"),
+                'percent': percent,
+                'finished' : self.finished
+            });
+            console.log('Reports', Reports);
             Reports.save();
             self.wk.set("correct", 0);
             self.wk.set("wrong", 0);

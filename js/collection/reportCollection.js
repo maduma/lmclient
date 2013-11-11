@@ -1,6 +1,5 @@
 define([ "jquery", "backbone", "underscore", "util/prop", "model/reportModel", "model/playerModel"], function( $, Backbone, _, Prop , ReportModel, Player) {
     var Collection = Backbone.Collection.extend({
-        model: ReportModel,
         sync: function( method, model, options ) {
             var self = this;
             var uid = Player.get("uid");
@@ -11,7 +10,7 @@ define([ "jquery", "backbone", "underscore", "util/prop", "model/reportModel", "
                     console.log("[reportCollection:read] reports not found in localStorage.");
                     options.error("[reportCollection:read] reports not found in localStorage.");
                 } else {
-                    options.success(self.models);
+                    options.success(savedReports);
                 }
                 deferred.resolve();
                 return deferred;
@@ -22,6 +21,10 @@ define([ "jquery", "backbone", "underscore", "util/prop", "model/reportModel", "
         save : function() {
             var uid = Player.get("uid");
             localStorage.setItem(Prop.tag + uid + ':reports', JSON.stringify(this.models));
+        },
+        addReport: function(attr) {
+          var report = new ReportModel(attr);
+          this.add(report);
         }
     });
     return new Collection();
