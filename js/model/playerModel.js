@@ -32,7 +32,7 @@ define(["jquery", "backbone", "util/prop"], function( $, Backbone, Prop ) {
             console.log("[playerModel:sync] model: ", model);
             console.log("[playerModel:sync] options", options);
             if (this.get("localStorage")) {
-                if (method == "read") {
+                if (method === "read") {
                     var deferred = $.Deferred();
                     var savedPlayer = JSON.parse(localStorage.getItem(Prop.tag + 'player'));
                     if (!savedPlayer) {
@@ -44,7 +44,7 @@ define(["jquery", "backbone", "util/prop"], function( $, Backbone, Prop ) {
                         deferred.resolve();
                     }
                     return deferred;
-                } else if (method == "update") {
+                } else if (method === "update") {
                     localStorage.setItem(Prop.tag + 'player', JSON.stringify(this));
                 }
             } else {

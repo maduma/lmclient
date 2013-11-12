@@ -36,8 +36,8 @@ define(["jquery", "backbone", "model/playerModel",
             },
             success: function() {
                 if (self.player.get("uid") === "maduma" ||
-                    self.player.get("uid") === "Hugo") {
-                    self.player.set("leveladd", 100);
+                    self.player.get("uid") === "toto") {
+                    self.player.set("leveladd", 55);
                     self.player.save();
                 }
                 setTimeout(function() {

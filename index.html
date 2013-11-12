@@ -144,7 +144,7 @@
         <!-- Underscore Template -->
         <script id="workoutItems" type="text/template">
             <%  _.each(collection.toJSON(), function(wk, id) {
-                    if (level -20 < wk.level && level + 20 >= wk.level) { %>
+                    if (level -10 < wk.level && level + 10 >= wk.level) { %>
                         <a href="#play?<%= wk.label %>" data-role="button"><%= wk.label %> - <%= wk.bank %> - <%= wk.gold %>,<%= wk.silver %>,<%= wk.bronze %>,<%= wk.miss %>,<%= wk.abort %></a>
             <%      } 
                 }); %>
