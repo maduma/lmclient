@@ -35,9 +35,11 @@ define(["jquery", "backbone", "model/playerModel",
                 }, 500);
             },
             success: function() {
-                if (self.player.get("uid") === "maduma" ||
-                    self.player.get("uid") === "toto") {
-                    self.player.set("leveladd", 55);
+                if (self.player.get("uid") === "aduma" ||
+                    self.player.get("uid") === "Cleoo") {
+                    self.player.set("goldMedal", 0);
+                    self.player.set("silverMedal", 0);
+                    self.player.set("bronzeMedal", 0);
                     self.player.save();
                 }
                 setTimeout(function() {
